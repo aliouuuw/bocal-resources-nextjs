@@ -12,7 +12,7 @@ export const UserSchema = z.object({
 export type User = z.infer<typeof UserSchema>;
 
 // Auth provider interface - this will be implemented with different databases
-export interface AuthProvider {
+export interface AuthProviderInterface {
   getUserByEmail: (email: string) => Promise<User | null>;
   validatePassword: (user: User, password: string) => Promise<boolean>;
   createUser?: (email: string, password: string, name?: string) => Promise<User>;

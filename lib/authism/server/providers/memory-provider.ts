@@ -1,4 +1,4 @@
-import { AuthProvider, User } from "../../shared/types";
+import { AuthProviderInterface, User } from "../../shared/types";
 import { hash, compare } from "../../shared/utils/bcrypt";
 
 // In-memory user store for development
@@ -21,7 +21,7 @@ const users: User[] = [
   }
 ];
 
-export const memoryAuthProvider: AuthProvider = {
+export const memoryAuthProvider: AuthProviderInterface = {
   getUserByEmail: async (email: string) => {
     try {
       const user = users.find(u => u.email === email);

@@ -1,12 +1,12 @@
 import { redirect } from "next/navigation";
-import { AuthProvider, LoginResult } from "../../shared/types";
+import { AuthProviderInterface, LoginResult } from "../../shared/types";
 import { getCurrentUser } from "./session";
 import { createSession, setCookie } from "./session";
 import { SESSION_DURATION } from "./tokens";
 
 // Server action for login
 export async function login(
-  authProvider: AuthProvider,
+  authProvider: AuthProviderInterface,
   email: string, 
   password: string
 ): Promise<LoginResult> {
