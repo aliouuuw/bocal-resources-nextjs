@@ -14,10 +14,22 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useAuth } from "@/lib/authism/hooks/use-auth";
+import { useAuth } from '../context/auth-context';
 import { useRouter } from "next/navigation";
 
-function SigninForm() {
+interface SigninFormProps {
+  title?: string;
+  description?: string;
+  redirectTo?: string;
+  homepageLink?: string;
+}
+
+export function SigninForm({
+  title = "Admin Login",
+  description = "Sign in to access the admin dashboard",
+  redirectTo = "/admin",
+  homepageLink = "/"
+}: SigninFormProps) {
   const router = useRouter();
   const { login, loading, error, clearError } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
@@ -43,19 +55,20 @@ function SigninForm() {
     const result = await login(email, password);
 
     if (result.success) {
-      router.replace("/admin");
+      router.replace(redirectTo);
     } else {
       setFormError(result.error || "Login failed");
     }
   }
+  
   return (
     <Card className="w-full max-w-md">
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl font-bold text-center">
-          Admin Login
+          {title}
         </CardTitle>
         <CardDescription className="text-center">
-          Sign in to access the admin dashboard
+          {description}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -110,7 +123,7 @@ function SigninForm() {
           </Button>
 
           <div className="text-center">
-            <Link href="/" className="text-sm text-primary hover:underline">
+            <Link href={homepageLink} className="text-sm text-primary hover:underline">
               Return to homepage
             </Link>
           </div>
@@ -118,6 +131,4 @@ function SigninForm() {
       </CardContent>
     </Card>
   );
-}
-
-export default SigninForm;
+} 

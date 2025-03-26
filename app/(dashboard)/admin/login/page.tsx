@@ -1,4 +1,4 @@
-import SigninForm from '@/components/authism/signin-form';
+import { SigninForm } from '@/lib/authism/client';
 
 export default function AdminLoginPage() {
 

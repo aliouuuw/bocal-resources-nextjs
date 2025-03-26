@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { User, Session } from "../types";
+import { User, Session } from "../../shared/types";
 import { createToken, verifyToken, SESSION_DURATION } from "./tokens";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 

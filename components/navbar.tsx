@@ -6,11 +6,11 @@ import { useTheme } from 'next-themes'
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { useAuth } from '@/lib/authism/hooks/use-auth'
+import { useAuth } from '@/lib/authism/client'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const router = useRouter()
   const { isAuthenticated } = useAuth()
@@ -18,10 +18,10 @@ export default function Navbar() {
   
   useEffect(() => {
     setMounted(true)
-  }, [isAuthenticated])
+  }, [])
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
   }
 
   const navItems = [

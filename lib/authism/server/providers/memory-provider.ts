@@ -1,5 +1,5 @@
-import { AuthProvider, User } from "../types";
-import { hash, compare } from "../utils/bcrypt";
+import { AuthProvider, User } from "../../shared/types";
+import { hash, compare } from "../../shared/utils/bcrypt";
 
 // In-memory user store for development
 const users: User[] = [
@@ -9,7 +9,7 @@ const users: User[] = [
     name: "Admin User",
     role: "admin",
     // This is the hashed version of "adminpass"
-    hashedPassword: "$2b$10$FcjYN6h3PlvEkyD/HXLDt.CjnCtPRNsIFzpiFsB2ExtbHyxVRwez."
+    hashedPassword: "$2b$10$tqKK7JjSDhSTdQpIG0oVBOGLd.FxZjaOEV8oPZJVx81xnGcSkW9xa"
   },
   {
     id: "2",
@@ -17,7 +17,7 @@ const users: User[] = [
     name: "Regular User",
     role: "user",
     // This is the hashed version of "password"
-    hashedPassword: "$2b$10$WtXLpHnyyFP0NFs7kGKTouupMe3v6ToBO1.4Hc/1IRh72H2h8PsyW"
+    hashedPassword: "$2b$10$ISRu6U93PBhI6W5de4erRuzJx.x/s/pH7OAM2sFRMufTf7DxEBkja"
   }
 ];
 
@@ -67,4 +67,4 @@ export const memoryAuthProvider: AuthProvider = {
       throw new Error("Error creating user", { cause: error });
     }
   }
-};
+}; 

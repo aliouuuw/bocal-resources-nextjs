@@ -1,5 +1,5 @@
 import { SignJWT, jwtVerify } from "jose";
-import { Session } from "../types";
+import { Session } from "../../shared/types";
 
 // Environment variables should be used for secrets in production
 const JWT_SECRET = process.env.JWT_SECRET || "your-development-secret-key";

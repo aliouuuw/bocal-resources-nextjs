@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { AuthProvider, LoginResult } from "../types";
+import { AuthProvider, LoginResult } from "../../shared/types";
 import { getCurrentUser } from "./session";
 import { createSession, setCookie } from "./session";
 import { SESSION_DURATION } from "./tokens";
@@ -57,6 +57,12 @@ export async function isAdmin(): Promise<boolean> {
   return !!user && user.role === "admin";
 }
 
+// Check if user is a user
+export async function isUser(): Promise<boolean> {
+  const user = await getCurrentUser();
+  return !!user && user.role === "user";
+}
+
 // Helper functions for route protection in server components
 export async function requireAuth() {
   const isAuthed = await isAuthenticated();
@@ -67,7 +73,12 @@ export async function requireAuth() {
 
 export async function requireAdmin() {
   const admin = await isAdmin();
+  const user = await isUser();
   if (!admin) {
-    redirect("/admin/login");
+    if (user) {
+      redirect("/user");
+    } else {
+      redirect("/admin/login");
+    }
   }
 } 

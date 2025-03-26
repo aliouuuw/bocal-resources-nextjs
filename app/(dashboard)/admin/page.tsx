@@ -1,6 +1,5 @@
-import { requireAdmin } from '@/lib/authism/core';
-import { getUserAction } from '@/app/actions/auth/user';
-import LogoutButton from '../../../components/authism/logout-button';
+import { requireAdmin, getUserAction } from '@/lib/authism/server';
+import { LogoutButton } from '@/lib/authism/client';
 
 export default async function AdminPage() {
   // Check admin status on the server
