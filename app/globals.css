@@ -48,7 +48,7 @@
   --background: linear-gradient(135deg, hsl(210, 40%, 98%), hsl(210, 40%, 95%));
   --background-rgb: 240, 249, 255;
   --foreground: hsl(222, 47%, 11%);
-  --card: rgba(255, 255, 255, 0.7);
+  --card: rgba(255, 255, 255, 0.321);
   --card-foreground: hsl(222, 47%, 11%);
   --popover: rgba(255, 255, 255, 0.8);
   --popover-foreground: hsl(222, 47%, 11%);
@@ -91,7 +91,7 @@
   --background: linear-gradient(135deg, hsl(223, 78%, 2%), hsl(224, 52%, 3%));
   --background-rgb: 8, 12, 20;
   --foreground: hsl(210, 40%, 98%);
-  --card: rgba(30, 41, 59, 0.6);
+  --card: rgba(19, 20, 50, 0.557);
   --card-foreground: hsl(210, 40%, 98%);
   --popover: rgba(30, 41, 59, 0.7);
   --popover-foreground: hsl(210, 40%, 98%);

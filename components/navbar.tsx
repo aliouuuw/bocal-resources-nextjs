@@ -1,19 +1,24 @@
 "use client"
+
 import { Button } from './ui/button'
 import { Moon, Sun, X, Menu } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useAuth } from '@/lib/authism/hooks/use-auth'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-
-  // Only run on client side
+  const router = useRouter()
+  const { isAuthenticated } = useAuth()
+  
+  
   useEffect(() => {
     setMounted(true)
-  }, [])
+  }, [isAuthenticated])
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
@@ -43,6 +48,9 @@ export default function Navbar() {
                 <Link href={item.href}>{item.name}</Link>
               </Button>
             ))}
+            {isAuthenticated ? (
+              <Button variant="ghost" onClick={() => router.push("/admin")}>Dashboard</Button>
+            ) : null}
             <Button variant="ghost" onClick={toggleTheme} className="text-foreground hover:text-primary">
               {mounted ? (
                 theme === 'dark' ? (
@@ -54,7 +62,7 @@ export default function Navbar() {
                 // Fallback icon while not mounted (prevents hydration mismatch)
                 <div className="h-5 w-5" />
               )}
-            </Button>       
+            </Button>  
           </div>
 
           {/* Mobile Menu Button */}
@@ -78,6 +86,18 @@ export default function Navbar() {
                   <Link href={item.href}>{item.name}</Link>
                 </Button>
               ))}
+              {isAuthenticated ? (
+                <Button 
+                  variant="ghost" 
+                  className="justify-start"
+                  onClick={() => {
+                    router.push("/admin");
+                    setIsOpen(false);
+                  }}
+                >
+                  Dashboard
+                </Button>
+              ) : null}
               <Button variant="ghost" onClick={toggleTheme} className="text-foreground hover:text-primary">
                 {mounted ? (
                   theme === 'dark' ? (

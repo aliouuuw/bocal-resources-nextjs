@@ -1,11 +1,10 @@
-import React from 'react'
+import SigninForm from '@/components/authism/signin-form';
 
-function page() {
+export default function AdminLoginPage() {
+
   return (
-    <div>
-      
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <SigninForm />
     </div>
-  )
+  );
 }
-
-export default page

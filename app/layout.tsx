@@ -3,6 +3,8 @@ import { Questrial } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
+import { AuthInitializer } from '@/components/authism/auth-initializer';
+
 const questrial = Questrial({
   subsets: ["latin"],
   weight: ["400"],
@@ -27,6 +29,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <AuthInitializer />
           <Header />
           {children}
         </ThemeProvider>
