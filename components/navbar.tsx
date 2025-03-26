@@ -5,7 +5,7 @@ import { Moon, Sun, X, Menu } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useAuth } from '@/lib/authism/hooks/use-auth'
 
 export default function Navbar() {
@@ -14,7 +14,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false)
   const router = useRouter()
   const { isAuthenticated } = useAuth()
-  
+  const pathname = usePathname()
   
   useEffect(() => {
     setMounted(true)
@@ -44,12 +44,12 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden space-x-4 md:flex">
             {navItems.map((item) => (
-              <Button key={item.name} variant="ghost" asChild>
+              <Button key={item.name} variant="navlink" active={pathname === item.href} asChild>
                 <Link href={item.href}>{item.name}</Link>
               </Button>
             ))}
             {isAuthenticated ? (
-              <Button variant="ghost" onClick={() => router.push("/admin")}>Dashboard</Button>
+              <Button variant="navlink" onClick={() => router.push("/admin")}>Dashboard</Button>
             ) : null}
             <Button variant="ghost" onClick={toggleTheme} className="text-foreground hover:text-primary">
               {mounted ? (
@@ -66,7 +66,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <Button className="md:hidden" variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+          <Button className="md:hidden" variant="link" size="icon" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
         </div>
@@ -78,7 +78,8 @@ export default function Navbar() {
               {navItems.map((item) => (
                 <Button
                   key={item.name}
-                  variant="ghost"
+                  variant="navlink"
+                  active={pathname === item.href}
                   className="justify-start"
                   asChild
                   onClick={() => setIsOpen(false)}
@@ -88,7 +89,7 @@ export default function Navbar() {
               ))}
               {isAuthenticated ? (
                 <Button 
-                  variant="ghost" 
+                  variant="navlink" 
                   className="justify-start"
                   onClick={() => {
                     router.push("/admin");

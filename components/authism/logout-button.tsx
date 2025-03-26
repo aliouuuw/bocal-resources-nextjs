@@ -29,9 +29,12 @@ function LogoutButton() {
     };
     
     return (
-        <div>
-            <Button onClick={handleLogout} variant="destructive">Logout</Button>
-        </div>
+        <Button 
+            onClick={handleLogout} 
+            variant="secondary"
+        >
+            Logout
+        </Button>
     );
 }
 
